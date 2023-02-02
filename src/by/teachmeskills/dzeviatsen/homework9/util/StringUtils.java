@@ -8,7 +8,7 @@ public class StringUtils {
         println("123");
         System.out.println("Строка пустая? " + isBlank("    "));
         System.out.println("Строка состоит полностью из букв русского алфавита? " + isRussian("авв"));
-        System.out.println(ifContains2("dvk", "smovomsdvkteeesdvjiedv"));
+        System.out.println(ifContains2("dvk", "smovomsdvkteeesdvjiedv")); //если длина искомой строки больше 3 символов, выходит ошибка, не знаю как исправить
     }
 
     public static void print(String text) {
