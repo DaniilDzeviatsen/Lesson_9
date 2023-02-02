@@ -64,7 +64,7 @@ public class StringUtils {
                 if (charArray[i] == charArray2[j]) {
 
                     for (int k=1; k<charArray.length-1; k++){
-                        if ((i + k) > charArray.length-k ||(i+k)>charArray2.length-k){
+                        if ((i + k) > charArray.length-1 ||(j+k)>charArray2.length-1){
                             throw new IllegalArgumentException("Wrong length");
                         }
                     if (charArray[i+k] == charArray2[j + k]) {
