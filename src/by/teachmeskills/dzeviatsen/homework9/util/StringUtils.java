@@ -8,7 +8,7 @@ public class StringUtils {
         println("123");
         System.out.println("Строка пустая? " + isBlank("    "));
         System.out.println("Строка состоит полностью из букв русского алфавита? " + isRussian("авв"));
-        System.out.println(ifContains2("teeумуe", "smovomsdvkteeesdvjiedv"));
+        System.out.println(ifContains2("dvk", "smovomsdvkteeesdvjiedv"));
     }
 
     public static void print(String text) {
@@ -61,24 +61,23 @@ public class StringUtils {
         char[] charArray2 = text2.toCharArray();
         for (int i = 0; i < charArray.length - 1; i++) {
             for (int j = 0; j < charArray2.length - 1; j++) {
-                for (int k = 1; k < charArray.length - 1; k++) {
-                    if ((i + k) > charArray.length - 1 || (j + k) > charArray2.length - 1) {
-//                            throw new IllegalArgumentException("Wrong length");
-                        break;
-                    }
-                    if(charArray[0]!=charArray2[j+k]){
-                        tr=false;
-                    }
-                    if (charArray[i + k] == charArray2[j + k]) {
+                if (charArray[i] == charArray2[j]) {
 
-                        tr = true;
+                    for (int k = 1; k < charArray.length - 1; k++) {
+                        if ((i + k) > charArray.length - 1 || (j + k) > charArray2.length - 1) {
+                            tr=false;
+                            return tr;
+                        }
+                        if (charArray[i + k] == charArray2[j + k]) {
+                            tr = true;
+                        }
                     }
-
-
                 }
             }
-        }return tr;
+        }
+        return tr;
     }
+
 
 }
 
