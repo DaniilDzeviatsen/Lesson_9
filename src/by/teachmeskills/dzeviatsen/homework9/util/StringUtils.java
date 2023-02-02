@@ -8,7 +8,7 @@ public class StringUtils {
         println("123");
         System.out.println("Строка пустая? " + isBlank("    "));
         System.out.println("Строка состоит полностью из букв русского алфавита? " + isRussian("авв"));
-        System.out.println(ifContains2("elo", "hello"));
+        System.out.println(ifContains2("tes", "smovomsdvktesdvjiedv"));
     }
 
     public static void print(String text) {
@@ -54,21 +54,6 @@ public class StringUtils {
         return tr;
     }
 
-    public static boolean ifContains(String text, String text2) {
-        boolean tr = false;
-        char[] charArray = text.toCharArray();
-        char[] charArray2 = text2.toCharArray();
-        for (int i = charArray.length - 1; i >= 0; i--) {
-            for (int j = charArray2.length - 1; j >= 0; j--) {
-
-                if (charArray[charArray.length - 1] == charArray2[charArray2.length - 1] && charArray[charArray.length - 2] == charArray2[charArray2.length - 2] && charArray[charArray.length - 3] == charArray2[charArray2.length - 3]) {
-                    tr = true;
-                }
-            }
-        }
-
-        return tr;
-    }
 
     public static boolean ifContains2(String text, String text2) {
         boolean tr = false;
@@ -77,12 +62,18 @@ public class StringUtils {
         for (int i = 0; i < charArray.length-1; i++) {
             for (int j = 0; j < charArray2.length-1; j++) {
                 if (charArray[i] == charArray2[j]) {
-                    if ((i + 1) > charArray.length-1 || (i + 2) > charArray.length-1||(j+1>charArray2.length-1||(j+2)>charArray2.length-1)) {
-                        break;
+                     {
+
                     }
-                    if (charArray[i + 1] == charArray2[j + 1]) {
-                        if (charArray[i + 2] == charArray2[j + 2]) {
-                            tr = true;
+                    for (int k=1; k<charArray.length-1; k++){
+                        if ((i + k) > charArray.length-1 ||(j+k)>charArray2.length-1){
+                            throw new IllegalArgumentException("Wrong length");
+                        }
+                    if (charArray[i + k] == charArray2[j + k]) {
+                        tr = true;
+                    }
+                         {
+
                         }
                     }
                 }
