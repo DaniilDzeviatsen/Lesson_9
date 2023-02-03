@@ -3,13 +3,7 @@ package by.teachmeskills.dzeviatsen.homework9.util;
 import java.util.Arrays;
 
 public class StringUtils {
-    public static void main(String[] args) {
-        print("abc");
-        println("123");
-        System.out.println("Строка пустая? " + isBlank("    "));
-        System.out.println("Строка состоит полностью из букв русского алфавита? " + isRussian("авв"));
-        System.out.println(ifContains2("dvk", "smovomsdvkteeesdvjiedv")); //если длина искомой строки больше 3 символов, выходит ошибка, не знаю как исправить
-    }
+
 
     public static void print(String text) {
         char[] charArray = text.toCharArray();
@@ -65,7 +59,7 @@ public class StringUtils {
 
                     for (int k = 1; k < charArray.length - 1; k++) {
                         if ((i + k) > charArray.length - 1 || (j + k) > charArray2.length - 1) {
-                            tr=false;
+                            tr = false;
                             return tr;
                         }
                         if (charArray[i + k] == charArray2[j + k]) {
@@ -78,7 +72,15 @@ public class StringUtils {
         return tr;
     }
 
-
+    public static int parseInt(char[] array) {
+        int finNum = 0;
+        for (int i = 0; i < array.length; i++) {
+            int num = array[i];
+            finNum = finNum * 10;
+            finNum = finNum + num;
+        }
+        return finNum;
+    }
 }
 
 
