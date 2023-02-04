@@ -79,6 +79,9 @@ if (charArray.length>charArray2.length){
     public static int parseInt(char[] array) {
         int finNum = 0;
         for (int i = 0; i < array.length; i++) {
+            if (array[i]>57||array[i]<48){
+                throw new IllegalArgumentException("Input data contains not just numbers");
+            }
             int num = array[i] - '0';
             finNum = finNum * 10;
             finNum = finNum + num;
