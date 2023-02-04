@@ -55,19 +55,21 @@ public class StringUtils {
         int k = 0;
         char[] charArray = text.toCharArray();
         char[] charArray2 = text2.toCharArray();
-
-            for (int j = 0; j < charArray2.length; j++) {
-                if (charArray[k] == charArray2[j]) {
-                    if ((k) > charArray.length-1) {
-                        break;
-                    }
-                    tr = true;
-                    k++;
-                }
-            }return tr;
+if (charArray.length>charArray2.length){
+    throw new IllegalArgumentException("You've entered wrong data");
+}
+        for (int j = 0; j < charArray2.length; j++) {
+            if (k > charArray.length - 1) {
+                return true;
+            }
+            if (charArray[k] == charArray2[j]) {
+                tr = true;
+                k++;
+            }
+            else tr=false;
         }
-
-
+        return tr;
+    }
 
 
     //не работает корректно, не знаю как исправить(если есть в первой строке и во второй
