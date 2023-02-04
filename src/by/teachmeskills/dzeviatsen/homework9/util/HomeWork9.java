@@ -10,24 +10,28 @@ public class HomeWork9 {
         switch (task) {
             case 2 -> {
                 System.out.println("Enter text you want to be checked");
-                String text = sc.nextLine();
+                String text=StringUtils.Input();
+                System.out.println("Is the text blank?");
                 System.out.println(StringUtils.isBlank(text));
             }
             case 3 -> {
                 System.out.println("Enter text you want to be checked");
-                String text = sc.nextLine();
+                String text = sc.next();
+                System.out.println("Does the text contains just russian letters?");
                 System.out.println(StringUtils.isRussian(text));
             }
             case 4 -> {
                 System.out.println("Enter the part you wanna find");
-                String text = sc.nextLine();
+                String text = sc.next();
                 System.out.println("Enter the text you wanna scan");
-                String text2 = sc.nextLine();
+                String text2 = sc.next();
                 System.out.println(StringUtils.ifContains2(text, text2));
             }
             case 5 -> {
-                char[] string = sc.nextLine().toCharArray();
-                System.out.println(StringUtils.parseInt(string));
+                System.out.println("Enter the number");
+                String text=StringUtils.Input();
+                char[] array = text.toCharArray();
+                System.out.println(StringUtils.parseInt(array));
             }
             default -> System.out.println("You've entered wrong number");
         }

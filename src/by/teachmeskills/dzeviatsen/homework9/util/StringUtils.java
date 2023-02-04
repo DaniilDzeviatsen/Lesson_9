@@ -1,6 +1,7 @@
 package by.teachmeskills.dzeviatsen.homework9.util;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class StringUtils {
 
@@ -51,35 +52,42 @@ public class StringUtils {
 
     public static boolean ifContains2(String text, String text2) {
         boolean tr = false;
+        int k = 0;
         char[] charArray = text.toCharArray();
         char[] charArray2 = text2.toCharArray();
-        for (int i = 0; i < charArray.length - 1; i++) {
-            for (int j = 0; j < charArray2.length - 1; j++) {
-                if (charArray[i] == charArray2[j]) {
 
-                    for (int k = 1; k < charArray.length - 1; k++) {
-                        if ((i + k) > charArray.length - 1 || (j + k) > charArray2.length - 1) {
-                            tr = false;
-                            return tr;
-                        }
-                        if (charArray[i + k] == charArray2[j + k]) {
-                            tr = true;
-                        }
+            for (int j = 0; j < charArray2.length; j++) {
+                if (charArray[k] == charArray2[j]) {
+                    if ((k) > charArray.length-1) {
+                        break;
                     }
+                    tr = true;
+                    k++;
                 }
-            }
+            }return tr;
         }
-        return tr;
-    }
+
+
+
+
+    //не работает корректно, не знаю как исправить(если есть в первой строке и во второй
+    //по два совподающих элемента подряд то выводит true, если нет false
+
 
     public static int parseInt(char[] array) {
         int finNum = 0;
         for (int i = 0; i < array.length; i++) {
-            int num = array[i];
+            int num = array[i] - '0';
             finNum = finNum * 10;
             finNum = finNum + num;
         }
         return finNum;
+    }
+
+    public static String Input() {
+        Scanner sc = new Scanner(System.in);
+        String line = sc.nextLine();
+        return line;
     }
 }
 
