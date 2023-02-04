@@ -55,9 +55,9 @@ public class StringUtils {
         int k = 0;
         char[] charArray = text.toCharArray();
         char[] charArray2 = text2.toCharArray();
-if (charArray.length>charArray2.length){
-    throw new IllegalArgumentException("You've entered wrong data");
-}
+        if (charArray.length > charArray2.length) {
+            throw new IllegalArgumentException("You've entered wrong data");
+        }
         for (int j = 0; j < charArray2.length; j++) {
             if (k > charArray.length - 1) {
                 return true;
@@ -65,21 +65,15 @@ if (charArray.length>charArray2.length){
             if (charArray[k] == charArray2[j]) {
                 tr = true;
                 k++;
-            }
-            else tr=false;
+            } else tr = false;
         }
         return tr;
     }
 
-
-    //не работает корректно, не знаю как исправить(если есть в первой строке и во второй
-    //по два совподающих элемента подряд то выводит true, если нет false
-
-
     public static int parseInt(char[] array) {
         int finNum = 0;
         for (int i = 0; i < array.length; i++) {
-            if (array[i]>57||array[i]<48){
+            if (array[i] > 57 || array[i] < 48) {
                 throw new IllegalArgumentException("Input data contains not just numbers");
             }
             int num = array[i] - '0';
