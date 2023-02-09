@@ -10,29 +10,28 @@ public class HomeWork9 {
         switch (task) {
             case 2 -> {
                 System.out.println("Enter text you want to be checked");
-                String text = StringUtils.Input();
+                char[] charArray = StringUtils.getArray();
                 System.out.println("Is the text blank?");
-                System.out.println(StringUtils.isBlank(text));
+                System.out.println(StringUtils.isBlank(charArray));
             }
             case 3 -> {
                 System.out.println("Enter text you want to be checked");
-                String text = sc.next();
+                char[] charArray = StringUtils.getArray();
                 System.out.println("Does the text contain just russian letters?");
-                System.out.println(StringUtils.isRussian(text));
+                System.out.println(StringUtils.isRussian(charArray));
             }
             case 4 -> {
                 System.out.println("Enter the part you wanna find");
-                String text = sc.next();
+                char[] charArray = StringUtils.getArray();
                 System.out.println("Enter the text you wanna scan");
-                String text2 = sc.next();
+                char[] charArray2 = StringUtils.getArray();
                 System.out.println("Does big papa contain tiny papa?");
-                System.out.println(StringUtils.ifContains2(text, text2));
+                System.out.println(StringUtils.ifContains2(charArray, charArray2));
             }
             case 5 -> {
                 System.out.println("Enter the number");
-                String text = StringUtils.Input();
-                char[] array = text.toCharArray();
-                System.out.println(StringUtils.parseInt(array));
+                char[] charArray = StringUtils.getArray();
+                System.out.println(StringUtils.parseInt(charArray));
             }
             default -> System.out.println("You've entered wrong number");
         }
