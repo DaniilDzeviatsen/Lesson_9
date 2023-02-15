@@ -41,22 +41,18 @@ public class StringUtils {
     }
 
 
-    public static boolean ifContains2(char[] charArray, char[] charArray2) {
-        boolean tr = false;
-        int k = 0;
-        if (charArray.length > charArray2.length) {
-            return false;
-        }
-        for (int j = 0; j < charArray2.length; j++) {
-            if (k > charArray.length - 1) {
-                return true;
+    public static boolean ifContains2(char[] chararray, char[] chararray2) {
+        for (int i = 0; i <= chararray2.length - chararray.length; i ++) {
+            boolean tr = true;
+            for (int j = 0; j < chararray.length; j ++) {
+                if (chararray2[i + j] != chararray[j]) {
+                    tr = false;
+                    break;
+                }
             }
-            if (charArray[k] == charArray2[j]) {
-                tr = true;
-                k++;
-            } else tr = false;
+            if (tr) return true;
         }
-        return tr;
+        return false;
     }
 
     public static int parseInt(char[] array) {
@@ -77,6 +73,7 @@ public class StringUtils {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine().toCharArray();
     }
+
 }
 
 
