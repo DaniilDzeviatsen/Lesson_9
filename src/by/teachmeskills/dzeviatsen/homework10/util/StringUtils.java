@@ -3,6 +3,11 @@ package by.teachmeskills.dzeviatsen.homework10.util;
 import java.util.Scanner;
 
 public class StringUtils {
+    public static final int CARD_NUMBER_LENGTH = 16;
+    public static final int SECURED_NUMBER_LENGTH = 4;
+    public static final int PASSPORT_NUM_LENGTH = 9;
+    private static final int PASSWORD_LENGTH = 8;
+
     public static String deleteExtraSpace(String string) {
         string.trim();
         while (string.contains("  ")) {
@@ -12,111 +17,111 @@ public class StringUtils {
     }
 
     public static String getSecureNum(String string) {
-        if (string.length() != 16) {
+        if (string.length() != CARD_NUMBER_LENGTH) {
             throw new IllegalArgumentException("Enter correct number which contains 16 numerals");
         }
-        char[] chars = string.toCharArray();
-        for (int i = 0; i < chars.length - 4; i++) {
-            if (chars[i] >= '0' && chars[i] <= '9') {
-                chars[i] = '*';
-            } else {
-                throw new IllegalArgumentException("Enter correct number which contains 16 numerals");
-            }
-        }
-
-        string = String.valueOf(chars);
-        String substr1 = string.substring(0, 4);
-        String substr2 = string.substring(4, 8);
-        String substr3 = string.substring(8, 12);
-        String substr4 = string.substring(12, 16);
-        string = substr1 + " " + substr2 + " " + substr3 + " " + substr4;
-        return string;
+        return "**** **** **** " + string.substring(CARD_NUMBER_LENGTH - SECURED_NUMBER_LENGTH);
 
     }
 
+
     public static String getShortName(String name, String surName, String middleName) {
-        name = name.substring(0, 1).toUpperCase() + ".";
-        if (middleName != "") {
-            middleName = middleName.substring(0, 1).toUpperCase() + ".";
+        char firstLetterName = name.charAt(0);
+        if (middleName.isEmpty()) {
+            return "%s %s.".formatted(surName, firstLetterName);
+        } else {
+            char firstLetterMidName = middleName.charAt(0);
+            return "%s %s. %s.".formatted(surName, firstLetterName, firstLetterMidName);
         }
-        String shortName = surName.substring(0, 1).toUpperCase() + surName.substring(1) + " " + name + middleName;
-        return shortName;
     }
 
     public static boolean ifCorrectRBPassportNumber(String string) {
-        boolean tr = false;
-        if (string.length() == 9) {
-            if (string.charAt(0) <= 'Z' && string.charAt(0) >= 'A' && string.charAt(1) >= 'A' && string.charAt(1) <= 'Z') {
-                for (int i = 2; i < string.length(); i++) {
-                    if (string.charAt(i) >= '0' && string.charAt(i) <= '9') {
-                        tr = true;
-                    }
-                }
-            } else {
-                tr = false;
+        boolean tr = true;
+        if (string.length() != PASSPORT_NUM_LENGTH) {
+            return false;
+        }
+        if (!(string.charAt(0) <= 'Z' && string.charAt(0) >= 'A' && string.charAt(1) >= 'A' && string.charAt(1) <= 'Z')) {
+            return false;
+        }
+        for (int i = 2; i < PASSPORT_NUM_LENGTH; i++) {
+            if (!(string.charAt(i) >= '0' && string.charAt(i) <= '9')) {
+                return false;
             }
         }
         return tr;
     }
 
+
     public static boolean ifSafe(String string) {
-        boolean tr = false;
-        if (string.length() < 8) {
-            return tr;
-        }
+        if (string.isBlank())
+            throw new IllegalArgumentException("Password should not be blank");
+
+        if (string.length() < PASSWORD_LENGTH)
+            return false;
+
+        int countOfUppercaseLetter = 0;
+        int countOfLowerCaseLetter = 0;
+        int countOfNumbers = 0;
+
         for (int i = 0; i < string.length(); i++) {
-            if (string.charAt(i) >= '0' && string.charAt(i) <= '9') {
-                for (int j = 0; j < string.length(); j++) {
-                    if (string.charAt(j) >= 'a' && string.charAt(j) <= 'z') {
-                        for (int k = 0; k < string.length(); k++) {
-                            if (string.charAt(k) >= 'A' && string.charAt(k) <= 'Z') {
-                                tr = true;
-                            } else {
-                                continue;
-                            }
-                        }
-                    } else {
-                        continue;
-                    }
-                }
-            } else {
-                continue;
-            }
+            if (isEnglishUpperCase(string.charAt(i)) || isRussianUpperCase(string.charAt(i)))
+                countOfUppercaseLetter++;
+            else if (Character.isDigit(string.charAt(i)))
+                countOfNumbers++;
+            else if (isEnglishLowerCase(string.charAt(i)) || isRussianLowerCase(string.charAt(i)))
+                countOfLowerCaseLetter++;
+
+            if (countOfNumbers >= 1 && countOfLowerCaseLetter >= 1 && countOfUppercaseLetter >= 1)
+                return true;
         }
-        return tr;
+
+        return false;
     }
 
     public static boolean ifEmailAdress(String string) {
-        boolean tr = false;
-        int counter = 0;
-        for (int i = 0; i < string.length(); i++) {
-            if (string.charAt(i) != ' ') {
-                if (string.charAt(i) == '@') {
-                    counter += 1;
-                    if (counter != 1) {
-                        tr = false;
-                        continue;
-                    }
-                    if (i != string.length() - 1 && i != 0) {
-                        tr = true;
-                    } else {
-                        tr = false;
-                        continue;
-                    }
-                } else {
-                    continue;
-                }
-            } else {
-                continue;
-            }
+        if (string.contains(" ")) {
+            return false;
         }
-        return tr;
+        int atIndex = string.indexOf('@');
+        boolean isAtSingle = atIndex != -1 && atIndex == string.lastIndexOf("@");
+        if (!isAtSingle) {
+            return false;
+        }
+        boolean isAtSurrounded = atIndex != 0 && atIndex != string.length() - 1;
+        return isAtSurrounded;
     }
 
     public static String Input() {
         Scanner sc = new Scanner(System.in);
         String string = sc.nextLine();
         return string;
+    }
+    public static boolean isRussianUpperCase(char letter) {
+        if ((letter < 'А' || letter > 'Я') && letter != 'Ё' )
+            return false;
+
+        return true;
+    }
+
+    public static boolean isRussianLowerCase(char letter) {
+        if ((letter < 'а' || letter > 'я') && letter != 'ё')
+            return false;
+
+        return true;
+    }
+
+    public static boolean isEnglishUpperCase(char letter) {
+        if (!Character.isUpperCase(letter) || !Character.isLetter(letter))
+            return false;
+
+        return true;
+    }
+
+    public static boolean isEnglishLowerCase(char letter) {
+        if (!Character.isLowerCase(letter))
+            return false;
+
+        return true;
     }
 
 }
